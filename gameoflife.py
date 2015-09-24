@@ -1,6 +1,8 @@
 import random
-import argparse
-
+#TODO: Add CLI arguments (argparse)
+#TODO: Docstrings
+#TODO: General commenting
+#TODO: Split into multiple modules?
 
 class Cell:
 
@@ -42,7 +44,6 @@ class World:
         self.generation = 1
 
     def __str__(self):
-        # Used when printing the world state
         output = 'Generation ' + str(self.generation)
         for x in range(len(self.world)):
             output += '\n'
@@ -52,7 +53,7 @@ class World:
         return output
 
     def getCell(self, x, y):
-        # This is where we do the wrap-around magic
+        # TODO: More infinity. Possibly loop around?
         if x < 0 or x >= len(self.world):
             return Cell(x, y, False)
         elif y < 0 or y >= len(self.world):
@@ -64,6 +65,8 @@ class World:
         count = 0
         # Python ranges are exclusive, have to add one to the second parameter
         # for the range to be inclusive.
+        # We want to count all cells that are alive within +- 1 X or Y values
+        # around our cell, without counting the cell itself.
         for xOffset in range(-1, 2):
             for yOffset in range(-1, 2):
                 if xOffset != 0 or yOffset != 0:
@@ -79,7 +82,6 @@ class World:
         birthList = []
         for row in self.world:
             for cell in row:
-                cellLives = False
                 neighbors = self.countAliveNeighbors(cell)  # number of neighbors
                 if cell.alive:
                     # If cell is alive and neighbors < 2 -> cell dies
