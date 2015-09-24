@@ -1,9 +1,10 @@
 import random
-#TODO: Add CLI arguments (argparse)
-#TODO: Docstrings
-#TODO: General commenting
-#TODO: Split into multiple modules?
-#TODO: CSV or BMP imports
+# TODO: Add CLI arguments (argparse)
+# TODO: Docstrings
+# TODO: General commenting
+# TODO: Split into multiple modules?
+# TODO: CSV or BMP imports
+
 
 class Cell:
 
@@ -38,7 +39,7 @@ class World:
             # Seed the world with predefined spots
             self.world = [[Cell(x, y, False) for y in range(size)] for x in range(size)]
             for seed in seeds:
-                self.world[seed[0]][seed[1]].birth()
+                self.world[seed[1]][seed[0]].birth()
         else:
             # Generate a random world
             self.world = [[Cell(x, y) for y in range(size)] for x in range(size)]
@@ -104,19 +105,29 @@ class World:
 
 
 def main():
+    # Square Block
     generations = 3
     world = World(3, (0, 1), (1, 1), (0, 2), (1, 2))
     for x in range(generations):
         print(world)
         world.simulateGeneration()
 
+    # Rectangle Blinker
     world = World(3, (0, 1), (1, 1), (2, 1))
     for x in range(generations):
         print(world)
         world.simulateGeneration()
 
+    # Infinite Growth?
+    generations = 5
+    world = World(7, (1, 1), (2, 1), (3, 1), (5, 1), (1, 2), (4, 3), (5, 3), (2, 4), (3, 4), (5, 4), (1, 5), (3, 5), (5,5))
+    for x in range(generations):
+        print(world)
+        world.simulateGeneration()
 
-    world = World(7, (1, 1), (1, 2), (1, 3), (1, 5), (2, 1), (3, 4), (3, 5), (4, 2), (4, 3), (4, 5), (5, 1), (5,3), (5,5))
+    # Glider
+    generations = 5
+    world = World(7, (1, 1), (2, 2), (0, 3), (1, 3), (2, 3))
     for x in range(generations):
         print(world)
         world.simulateGeneration()
