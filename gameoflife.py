@@ -3,6 +3,7 @@ import random
 #TODO: Docstrings
 #TODO: General commenting
 #TODO: Split into multiple modules?
+#TODO: CSV or BMP imports
 
 class Cell:
 
@@ -37,7 +38,7 @@ class World:
             # Seed the world with predefined spots
             self.world = [[Cell(x, y, False) for y in range(size)] for x in range(size)]
             for seed in seeds:
-                self.world[seed[1]][seed[0]].alive = True
+                self.world[seed[0]][seed[1]].birth()
         else:
             # Generate a random world
             self.world = [[Cell(x, y) for y in range(size)] for x in range(size)]
@@ -110,6 +111,12 @@ def main():
         world.simulateGeneration()
 
     world = World(3, (0, 1), (1, 1), (2, 1))
+    for x in range(generations):
+        print(world)
+        world.simulateGeneration()
+
+
+    world = World(7, (1, 1), (1, 2), (1, 3), (1, 5), (2, 1), (3, 4), (3, 5), (4, 2), (4, 3), (4, 5), (5, 1), (5,3), (5,5))
     for x in range(generations):
         print(world)
         world.simulateGeneration()
